@@ -35,7 +35,7 @@ const boutonTrierDefault= document.querySelector(".btn-trier-default");
         document.querySelector(".gallery").innerHTML="";
         genererWorks(works);
 })
-//Bouton de triage d'affichage en fonction des catégorie
+//Bouton de triage d'affichage en fonction des catégories
 
 //Objet
 const boutonTrierObjets = document.querySelector(".btn-trier-objet");

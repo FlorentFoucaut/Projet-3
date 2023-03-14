@@ -36,15 +36,43 @@ const boutonTrierDefault= document.querySelector(".btn-trier-default");
         genererWorks(works);
 })
 //Bouton de triage d'affichage en fonction des catégorie
-const boutonTrierCategorie = document.querySelector(".btn-trier-categorie");
 
-boutonTrierCategorie.addEventListener("click", function() {
-    const worksOrdonnes = Array.from(works);
-    worksOrdonnes.sort(function (a, b){
-        return a.categoryId- b.categoryId;
+//Objet
+const boutonTrierObjets = document.querySelector(".btn-trier-objet");
+boutonTrierObjets.addEventListener("click", function() {
+    const worksFiltres = works.filter(function (works) {
+    return works.categoryId === 1 ;
     });
+  
+  
     document.querySelector(".gallery").innerHTML="";
-    genererWorks(worksOrdonnes);
+    genererWorks(worksFiltres);
+    
+
+});
+//Appartements 
+const boutonTrierAppartements = document.querySelector(".btn-trier-appart");
+boutonTrierAppartements.addEventListener("click", function() {
+    const worksFiltres = works.filter(function (works) {
+    return works.categoryId === 2 ;
+    });
+  
+  
+    document.querySelector(".gallery").innerHTML="";
+    genererWorks(worksFiltres);
+    
+
+});
+//Hotel & restaurants
+const boutonTrierHotel = document.querySelector(".btn-trier-hotel");
+boutonTrierHotel.addEventListener("click", function() {
+    const worksFiltres = works.filter(function (works) {
+    return works.categoryId === 3 ;
+    });
+  
+  
+    document.querySelector(".gallery").innerHTML="";
+    genererWorks(worksFiltres);
     
 
 });

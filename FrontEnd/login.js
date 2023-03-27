@@ -2,14 +2,10 @@
 const loginForm = document.getElementById('login');
 loginForm.addEventListener('submit', function(event) {
   event.preventDefault(); 
-
-  // Récupération de l'email et du mot de passe
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-
+  
   // Boucle en cas de champs non rempli
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const email =document.getElementById('email').value;
+  const password = document.getElementById('password').value;
   if (!email || !password) {
     alert('Veuillez remplir une email et/ou un mot de passe');
     return;
@@ -17,21 +13,25 @@ loginForm.addEventListener('submit', function(event) {
 
  
   const chargeUtile = {
-    email: email,
-    password: password
+    email: document.getElementById('email').value,
+    password: document.getElementById('password').value,
   };
  // Envoie des requêtes à l'api
-  fetch('http://localhost:5678/api-docs/users/login', {
+  fetch('http://localhost:5678/api/users/login', {
     method: 'POST',
-    headers: {"Content-type": "application/json"},
+    headers: {"Content-type": "application/json", "accept": "application/json"},
     body: JSON.stringify(chargeUtile)
   })
+  .then(res => res.json())
   //Traitement de la réponse de l'API
   .then(response => {
-    if (response.ok) {
+    console.log(response.token);
+    if (response.token) {
       alert('Vous êtes maintenant connecté');
       // Redirige vers la page de l'utilisateur
-      window.location.href = 'user.html';
+       window.localStorage.setItem("token", response.token); 
+       window.location.href = 'user.html';
+    
     } else {
       alert('Erreur de connexion');
     }

@@ -30,11 +30,11 @@ loginForm.addEventListener('submit', function(event) {
       alert('Vous êtes maintenant connecté');
       // Redirige vers la page de l'utilisateur
        window.localStorage.setItem("token", response.token); 
-       window.location.href = 'user.html';
+       window.location.href = 'index.html';
     
     } else {
       alert('Erreur de connexion');
     }
-  })
+  }).catch(error => console.error(error));
 
 });

@@ -1,3 +1,38 @@
+//Modification de la page passage admin après connexion
+
+let token= window.localStorage.getItem("token")
+function userPage(){
+    if(token !== null){
+      const edition = document.querySelector("#edition");
+      edition.style.display ='flex';
+      document.querySelector("#log").textContent = "logout";
+      const modif= document.querySelectorAll(".modif");
+      for (let i = 0; i < modif.length; i++) {
+        modif[i].style.display = 'inline-block';
+      }
+      const removeFilter=document.querySelector("#filters");
+      removeFilter.style.display='none';
+    
+    }else{
+        document.querySelector("#log").textContent = "login";
+    }
+    
+    };
+    userPage();
+    
+    // Click de redirection pour se connecter ou se deconnecter
+    const connect = document.getElementById("log");
+    connect.addEventListener('click', function(e) {
+        e.preventDefault();
+        if(token !== null){
+            alert('Déconnexion vous allez être redirigé.');
+            window.localStorage.removeItem("token")
+            window.location.href='index.html';
+        } else {
+            window.location.href ='login.html';
+        }
+    });
+
 let modal = null;
 //Création de la fonction permettant d'ouvrir la modale
 const openModal = function(e) {
@@ -40,5 +75,4 @@ window.addEventListener('keydown', function(e){
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
-})
-
+});

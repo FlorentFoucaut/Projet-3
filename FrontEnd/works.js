@@ -95,23 +95,28 @@ image_input.addEventListener("change", function(){
     reader.readAsDataURL(this.files[0]);
 });
 
+// Faire fonctionner les boutons
 const newWorkForm = document.querySelector(".form-wrapper-modal");
 newWorkForm.addEventListener('submit', function(event) {
     event.preventDefault();
-
+// Recupération des données entrées dans le formulaire
     const imageUrl = document.querySelector("#imageUrl").files[0];
     const title = document.querySelector("#title").value;
     const categoryId = document.querySelector("#categoryId").value;
+
+    // Boucle en cas de champs non rempli
     if(!imageUrl || !title || !categoryId){
         alert('Veuillez remplir tous les champs');
         return;
     }
 
+    // Création du formData pour réunir toutes les données afin de l'envoyer à l'API
     const formData = new FormData();
     formData.append("imageUrl", imageUrl);
     formData.append("title", title);
     formData.append("category", categoryId);
 
+    //Envoi à l'API avec l'autorisation du token
     fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {

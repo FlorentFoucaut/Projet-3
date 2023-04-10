@@ -23,8 +23,108 @@ function genererWorks(works) {
 
     }
 }
-// Génération de l'affichage de toute les travaux
+// Génération de l'affichage de tous les travaux
 genererWorks(works);
+
+//Création de la fonction qui supprimera un travaux selectionné en mode admin
+function supprimerWork(id) {
+    fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+      });
+  }
+
+  //Même principe de fonctionnemnt que la génération travaux en page principale
+function genererWorksModal(works) {
+// Création de la boucle afin d'afficher tous les travaux
+    for (let i = 0; i < works.length; i++){
+// Création de la figure work et ajout des éléments dans cette figure
+const newFigureModal= document.createElement("figure");
+newFigureModal.className = "workModal";
+const buttonElementModal = document.createElement("button");
+buttonElementModal.innerHTML='<i class="fa-solid fa-trash-can"></i>';
+const imageElementModal = document.createElement("img");
+imageElementModal.src = works[i].imageUrl;
+const titleElementModal = document.createElement("figcaption");
+titleElementModal.textContent = "éditer";
+
+
+
+
+//ajout des éléments au parent figure "workModal"
+newFigureModal.appendChild(buttonElementModal);
+newFigureModal.appendChild(imageElementModal);
+newFigureModal.appendChild(titleElementModal);
+
+
+//integration de la figure work dans la galerie 
+    const sectionGalleryModal = document.querySelector(".gallery-modal");
+    sectionGalleryModal.appendChild(newFigureModal);
+
+    //Rendu de l'éfficacité du bouton en ajoutant le listener
+    buttonElementModal.addEventListener("click", function () {
+        const id = works[i].id;
+        supprimerWork(id);
+        newFigureModal.remove();
+      });
+    }
+}
+
+// Génération de l'affichage de tous les travaux
+genererWorksModal(works);
+
+//Prévisualisation de l'image
+const image_input = document.querySelector("#imageUrl");
+var uploaded_image = "";
+
+image_input.addEventListener("change", function(){
+    const reader=new FileReader();
+    reader.addEventListener("load", () => {
+        uploaded_image = reader.result;
+        document.querySelector("#display-image").style.display ='block';
+        document.querySelector("#display-image").style.backgroundImage=`url(${uploaded_image})`;
+
+    });
+    reader.readAsDataURL(this.files[0]);
+});
+
+const newWorkForm = document.querySelector(".form-wrapper-modal");
+newWorkForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const imageUrl = document.querySelector("#imageUrl").files[0];
+    const title = document.querySelector("#title").value;
+    const categoryId = document.querySelector("#categoryId").value;
+    if(!imageUrl || !title || !categoryId){
+        alert('Veuillez remplir tous les champs');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("imageUrl", imageUrl);
+    formData.append("title", title);
+    formData.append("category", categoryId);
+
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(response => console.log(response))
+    .catch(error => console.error(error));
+});
+
+
 
 // Gestion des boutons
 

@@ -168,6 +168,10 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
+#log:hover{
+	color:#B1663C;
+}
 #login{
 	display: flex;
 	flex-direction: column;
@@ -283,7 +287,21 @@ nav a {
 	display:flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+}
+
+.modal-wrapper2 {
+	max-width:630px;
+	width: 100%;
+	max-height: 730px;
+	background-color: #fff;
+	border-radius: 0.5rem;
+}
+
+.form-wrapper-modal{
+	display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 }
 
 .modal-wrapper h1{
@@ -292,6 +310,48 @@ nav a {
 	font-weight: 400;
 	font-size: 26px;
 	color: black;
+	margin-top: 2rem;
+}
+.gallery-modal{
+	display: flex;
+	flex-wrap: wrap;
+	overflow:auto;
+	gap : 5px;
+	max-width: 77%;
+	justify-content: center;
+	align-items: flex-start;
+	border-bottom:grey 1px solid ;
+	margin-bottom: 4rem;
+	margin-top: 2rem;
+	padding-bottom: 4rem;
+}
+.gallery-modal img {
+	max-width: 100px;
+	max-height: 200px;
+}
+
+.gallery-modal button{
+position:absolute;
+margin-top: 5px;
+margin-left: 75px;
+border:none;
+color:white;
+background-color: black;
+font-size: 10px;
+width:20px;
+height:20px;
+}
+.gallery-modal button:hover{
+	cursor: pointer;
+}
+
+#display-image {
+	display:none;
+	width: 100px;
+	height: 200px;
+	border: 1px solid black;
+	background-position: center;
+	background-size: cover;
 }
 
 #proj{

@@ -76,16 +76,18 @@ newFigureModal.appendChild(titleElementModal);
       });
     }
 
-const clearGallery = document.querySelector("#supp");
-clearGallery.addEventListener("click", function () {
-    for (let i = 0; i < works.length; i++){
-    const id = works[i].id;
-    supprimerWork(id);
-    newFigureModal.remove();
-    }
-  });
-
-}
+    const clearGallery = document.querySelector("#supp");
+    clearGallery.addEventListener("click", function () {
+      const galleryModal = document.querySelector(".gallery-modal");
+      galleryModal.innerHTML = "";
+      const galleryIndex = document.querySelector(".gallery")
+      galleryIndex.innerHTML = "";
+      for (let i = 0; i < works.length; i++) {
+        const id = works[i].id;
+        supprimerWork(id);
+      }
+    });
+  }
 // Génération de l'affichage de tous les travaux
 genererWorksModal(works);
 

@@ -427,15 +427,33 @@ nav a {
 	width: 173px;
 	height: 36px;
 	top:390px;
-	opacity: 1;
+	opacity: 0;
 }
 #ajout-photo i {
 	font-size: 100px;
+	color:#B9C5CC;
 }
 
 #ajout-photo button{
 	width: 173px;
 	height: 36px;
+	background-color:#CBD6DC; 
+	border-radius: 50px;
+	border:none;
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+color: #306685;
+}
+
+#ajout-photo p {
+	font-family: 'Work Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+color: #444444;
+margin-top: 1rem; 
 }
 
 .form-wrapper-modal label{

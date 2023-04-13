@@ -75,8 +75,17 @@ newFigureModal.appendChild(titleElementModal);
         newFigureModal.remove();
       });
     }
-}
 
+const clearGallery = document.querySelector("#supp");
+clearGallery.addEventListener("click", function () {
+    for (let i = 0; i < works.length; i++){
+    const id = works[i].id;
+    supprimerWork(id);
+    newFigureModal.remove();
+    }
+  });
+
+}
 // Génération de l'affichage de tous les travaux
 genererWorksModal(works);
 
@@ -90,6 +99,7 @@ image_input.addEventListener("change", function(){
         uploaded_image = reader.result;
         document.querySelector("#display-image").style.display ='block';
         document.querySelector("#display-image").style.backgroundImage=`url(${uploaded_image})`;
+        document.querySelectorAll(".js-display").forEach(element => element.style.display='none');
 
     });
     reader.readAsDataURL(this.files[0]);

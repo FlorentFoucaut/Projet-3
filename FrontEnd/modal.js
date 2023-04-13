@@ -88,6 +88,14 @@ const switchModals = function(e) {
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
 }
 
+// Fonction pour changer l'affichage des modales pour retourner à la modale 1
+const backModal = function(e) {
+    e.preventDefault();
+
+    closeModal(e);
+
+    openModal(e);
+}
 // Permet de pouvoir cliquer à l'intérieur de la modale sans que ça ne se referme
 const stopPropagation = function(e) {
     e.stopPropagation()
@@ -95,6 +103,11 @@ const stopPropagation = function(e) {
 //Permet de pouvoir cliquer sur le lien pour ouvrir la modale
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click', openModal);
+});
+
+//Permet de pouvoir cliquer sur la flèche pour ouvrir la modale 1
+document.querySelectorAll('.js-back-modal').forEach(a => {
+    a.addEventListener('click', backModal);
 });
 
 // Permer de faire le switch entre les modales lorque l'on clique sur le bouton ajouter photo
@@ -105,6 +118,29 @@ window.addEventListener('keydown', function(e){
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
+});
+
+//Fonction permettant de desactivé le bouton les conditions ne sont pas remplie
+const form = document.querySelector('.form-wrapper-modal');
+const submitButton = form.querySelector('input[type="submit"]');
+
+// Bouton desactivé initialement
+submitButton.disabled = true;
+
+//Eventlistener pour changer d'état
+form.addEventListener('change', () => {
+  // Vérification si tous les champs obligatoires sont remplis
+  const imageUrlInput = form.querySelector('#imageUrl');
+  const titleInput = form.querySelector('#title');
+  const categoryIdInput = form.querySelector('#categoryId');
+
+  if (imageUrlInput.value && titleInput.value && categoryIdInput.value) {
+    submitButton.disabled = false;
+    submitButton.style.backgroundColor ='#1D6154';
+  } else {
+    submitButton.disabled = true;
+    submitButton.style.backgroundColor ='#A7A7A7';
+  }
 });
 
 

@@ -32,7 +32,7 @@
 </header>
 <main>
 	<section id="introduction">
-		<figure>
+		<figure id="photo-intro">
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<div class="modif" style="display:none;">
                 <a href="#">
@@ -74,25 +74,30 @@
 			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" style="display:none;">
                 <div class="modal-wrapper js-modal-stop">
                     <a href="#" class="js-modal-close"><i class="fa-solid fa-xmark"></i></a>
+				<div class="modal-wrapper-content">
                     <h1>Galerie photo</h1>
                     <div class="gallery-modal">
 
                     </div>
-                    <button> Ajouter une photo</button>
-                    <p><a href="#">Supprimer la galerie</a></p>
+                    <button id="ajt-photo"> Ajouter une photo</button>
+                    <p><a id="supp" href="#">Supprimer la galerie</a></p>
                 </div>
+				</div>
             </aside>
             <aside id="modal2" class="modal" aria-hidden="true" role="dialog" style="display:none;">
                 <div class="modal-wrapper2 js-modal-stop">
-                    <a href="#" ><i class="fa-sharp fa-solid fa-left"></i></a>
+					<div id="button-close-back">
+                    <a href="#" class="js-back-modal"><i class="fa-sharp fa-solid fa-left-long"></i></a>
 					<a href="#" class="js-modal-close"><i class="fa-solid fa-xmark"></i></a>
+				</div>
                     <form method="post" class="form-wrapper-modal">
                     	<h1>Ajout Photo</h1>
                     	<div id="ajout-photo">
-                    	<i></i>
-                		<input type="file" name="imageUrl" id="imageUrl" accept="image/png, image/jpeg, image/jpg"/>
+							<i class="fa-sharp fa-regular fa-image js-display"></i>
+                		<input type="file" name="imageUrl" id="imageUrl" class="js-display" accept="image/png, image/jpeg, image/jpg"/>
+						<button class="js-display">+ Ajouter photo</button>
 						<div id="display-image"></div>
-						<p>jpg, png : 4mo max</p>
+						<p class="js-display">jpg, png : 4mo max</p>
                   		</div>
                         <label for="title">Titre</label>
                         <input type="text" name="title" id="title">
@@ -102,7 +107,7 @@
 							<option value="2">Appartements</option>
 							<option value="3">Hôtel & restauration</option>
 						</select>
-                        <input type="submit" value="Valider">
+                        <input type="submit" value="Valider" disabled="">
                    </form>
                 </div>
             </aside>

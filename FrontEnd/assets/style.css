@@ -169,6 +169,35 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#filters{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 60px;
+}
+
+#filters button{
+	min-width: 100px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding-right: 1rem;
+	padding-left: 1rem;	
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: center;
+	background-color:#fff;
+	color:#1D6154;
+}
+#filters button:hover{
+	cursor: pointer;
+	color:#fff;
+	background-color: #1D6154;
+}
 #log:hover{
 	color:#B1663C;
 }
@@ -255,12 +284,17 @@ color: #3D3D3D;
 	border-radius: 30px;
 }
 
+#photo-intro .modif{
+	margin-left: 3.5rem;
+	margin-top: 1rem;
+}
 
+article .modif{
+	margin-bottom:1rem;
+}
 .modif a{
 	text-decoration: none;
 	color:black;
-	padding-top: 1rem;
-	padding-left: 3.5rem;
 }
 nav a {
 	text-decoration:none;
@@ -277,17 +311,69 @@ nav a {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
 }
+.modal-wrapper #ajt-photo{
+	min-width: 200px;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+	border-radius: 60px;
+	margin-top: 38px;;
+	margin-bottom: 13px;
+	padding-left: 49px;
+	padding-right: 49px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.workModal{
+	position: relative;
+}
+.modal-wrapper a {
+	text-decoration: none;
+	color:black;
+}
 
-.modal-wrapper {
+.modal-wrapper #supp{
+	color: #D65353;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	padding-bottom: 49px;
+}
+
+#modal1 .fa-xmark{
+	float: inline-end;
+	padding-top: 1rem;
+	padding-right: 1rem;
+	font-size: 20px;
+	color: black;
+}
+
+.modal-wrapper{
 	max-width:630px;
 	width: 100%;
-	max-height: 730px;
+	max-height: 800px;
+	background-color: #fff;
+	border-radius: 0.5rem;
+}
+.modal-wrapper-content {
+	max-width:630px;
+	width: 100%;
+	max-height: 800px;
 	background-color: #fff;
 	border-radius: 0.5rem;
 	display:flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
+
 
 .modal-wrapper2 {
 	max-width:630px;
@@ -297,14 +383,112 @@ nav a {
 	border-radius: 0.5rem;
 }
 
-.form-wrapper-modal{
-	display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+#button-close-back{
+	display:flex;
+	justify-content: space-between;
+	margin-right:1rem;
+	margin-left: 1rem;
+	margin-top:1rem;
+	font-size: 20px;
+}
+#button-close-back a {
+	text-decoration: none;
+	color: black;
 }
 
-.modal-wrapper h1{
+.form-wrapper-modal{
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}
+
+.form-wrapper-modal h1{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	color: black;
+	margin-top: 2rem;
+}
+
+#ajout-photo{
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	width: 420px;
+	height: 169px;
+	background-color:#e8f1f7 ;
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+#ajout-photo input{
+	margin-bottom: 0;
+	position: absolute;
+	width: 173px;
+	height: 36px;
+	top:390px;
+	opacity: 1;
+}
+#ajout-photo i {
+	font-size: 100px;
+}
+
+#ajout-photo button{
+	width: 173px;
+	height: 36px;
+}
+
+.form-wrapper-modal label{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	color: #3D3D3D;
+	margin-bottom: 10px;
+}
+
+.form-wrapper-modal input, select{
+	height:51px;
+	margin-bottom: 20px;
+	border:none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	
+}
+
+.form-wrapper-modal label, input, select{
+	width : 67%;
+}
+.form-wrapper-modal select{
+	background-color:#fff ;
+}
+
+.form-wrapper-modal option{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+
+
+.form-wrapper-modal input[type="submit"]{
+	width: 237px;
+	min-width: 200px;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+	border-radius: 60px;
+
+
+}
+
+
+.modal-wrapper  h1{
 	font-family: 'Work Sans';
 	font-style: normal;
 	font-weight: 400;
@@ -321,7 +505,6 @@ flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	border-bottom:grey 1px solid ;
-	margin-bottom: 4rem;
 	margin-top: 2rem;
 	padding-bottom: 4rem;
 }
@@ -358,7 +541,10 @@ height:20px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin-left: 6rem;
+	gap:30px;
+}
+#proj .modif{
+	margin-top: 0.5rem;;
 }
 
 input[type="submit"]{

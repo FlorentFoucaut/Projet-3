@@ -63,13 +63,12 @@ const closeModal = function(e){
     modal = null;
 };
 
-
 window.onclick = function(event) {
     if (event.target == modal) {
-      modal.style.display = "none";
-    }
+     modal.style.display = "none";
+  }
     console.log(event.target)
-  } 
+} 
 
 const ajoutButtonPhoto = document.querySelector('#modal1 button');
 // Fonction pour changer l'affichage des modales

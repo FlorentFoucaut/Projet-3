@@ -1,6 +1,7 @@
 //Recupération du travail sur l'API
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
+
 //Création d'une fonction qui regroupe tout le necessaire afin de créer une carte de work
 function genererWorks(works) {
 // Création de la boucle afin d'afficher tous les travaux
@@ -144,6 +145,9 @@ newWorkForm.addEventListener('submit', function(event) {
 
 
 // Gestion des boutons
+//Récupération des catégories sur l'API
+const reponseCat= await fetch ("http://localhost:5678/api/categories")
+const categories = await reponseCat.json();
 
 //Bouton de triage d'affichage par defaut
 const boutonTrierDefault= document.querySelector(".btn-trier-default");
@@ -152,44 +156,31 @@ const boutonTrierDefault= document.querySelector(".btn-trier-default");
         document.querySelector(".gallery").innerHTML="";
         genererWorks(works);
 })
-//Bouton de triage d'affichage en fonction des catégories
+
+//fonction pour générer les filtres dynamiquement
+function genererFiltres(categories){
+    for (let i = 0; i < categories.length; i++){
+        const buttonTrier= document.createElement("button");
+        buttonTrier.className="js-trier";
+        buttonTrier.innerText= categories[i].name;
+        
+        const sectionFilters= document.querySelector("#filters");
+        sectionFilters.appendChild(buttonTrier);
+    }
+}
+genererFiltres(categories);
 
 //Objet
-const boutonTrierObjets = document.querySelector(".btn-trier-objet");
-boutonTrierObjets.addEventListener("click", function() {
-    const worksFiltres = works.filter(function (works) {
-    return works.categoryId === 1 ;
-    });
-  
-  
-    document.querySelector(".gallery").innerHTML="";
-    genererWorks(worksFiltres);
+function filtresTriage(categories) {
+const boutonTrier = document.querySelectorAll(".js-trier");
+boutonTrier.forEach(element => element.addEventListener("click", function() {
+    console.log(element.innerText);
+    const filtresCat = works.filter(data => data.category.name == element.innerText)
     
-
-});
-//Appartements 
-const boutonTrierAppartements = document.querySelector(".btn-trier-appart");
-boutonTrierAppartements.addEventListener("click", function() {
-    const worksFiltres = works.filter(function (works) {
-    return works.categoryId === 2 ;
-    });
-  
-  
+   
     document.querySelector(".gallery").innerHTML="";
-    genererWorks(worksFiltres);
-    
+    genererWorks(filtresCat);
+    }));
+}
 
-});
-//Hotel & restaurants
-const boutonTrierHotel = document.querySelector(".btn-trier-hotel");
-boutonTrierHotel.addEventListener("click", function() {
-    const worksFiltres = works.filter(function (works) {
-    return works.categoryId === 3 ;
-    });
-  
-  
-    document.querySelector(".gallery").innerHTML="";
-    genererWorks(worksFiltres);
-    
-
-});
+filtresTriage(categories);

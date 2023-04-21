@@ -169,12 +169,10 @@ function genererFiltres(categories){
     }
 }
 genererFiltres(categories);
-
-//Objet
-function filtresTriage(categories) {
+// Fonction pour faire fonctionner les boutons afin de trier par catégorie
+function filtresTriage() {
 const boutonTrier = document.querySelectorAll(".js-trier");
 boutonTrier.forEach(element => element.addEventListener("click", function() {
-    console.log(element.innerText);
     const filtresCat = works.filter(data => data.category.name == element.innerText)
     
    

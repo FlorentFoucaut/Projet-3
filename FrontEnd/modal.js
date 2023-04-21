@@ -1,3 +1,63 @@
+const works = await (await fetch("http://localhost:5678/api/works")).json();
+//Création de la fonction qui supprimera un travaux selectionné en mode admin
+async function supprimerWork(id) {
+    await fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+      },
+    })
+     
+  }
+
+
+function genererWorksModal(works) {
+    // Création de la boucle afin d'afficher tous les travaux
+        for (let i = 0; i < works.length; i++){
+    // Création de la figure work et ajout des éléments dans cette figure
+    const newFigureModal= document.createElement("figure");
+    newFigureModal.className = "workModal";
+    const buttonElementModal = document.createElement("button");
+    buttonElementModal.innerHTML='<i class="fa-solid fa-trash-can"></i>';
+    const imageElementModal = document.createElement("img");
+    imageElementModal.src = works[i].imageUrl;
+    const titleElementModal = document.createElement("figcaption");
+    titleElementModal.textContent = "éditer";
+    
+    
+    
+    
+    //ajout des éléments au parent figure "workModal"
+    newFigureModal.appendChild(buttonElementModal);
+    newFigureModal.appendChild(imageElementModal);
+    newFigureModal.appendChild(titleElementModal);
+    
+    
+    //integration de la figure work dans la galerie 
+        const sectionGalleryModal = document.querySelector(".gallery-modal");
+        sectionGalleryModal.appendChild(newFigureModal);
+    
+        //Rendu de l'éfficacité du bouton en ajoutant le listener
+        buttonElementModal.addEventListener("click", function () {
+            const id = works[i].id;
+            supprimerWork(id);
+            newFigureModal.remove();
+          });
+        }
+    
+        const clearGallery = document.querySelector("#supp");
+        clearGallery.addEventListener("click", function () {
+          const galleryModal = document.querySelector(".gallery-modal");
+          galleryModal.innerHTML = "";
+          const galleryIndex = document.querySelector(".gallery")
+          galleryIndex.innerHTML = "";
+          for (let i = 0; i < works.length; i++) {
+            const id = works[i].id;
+            supprimerWork(id);
+          }
+        });
+      }
 
 
 //Modification de la page passage admin après connexion
@@ -37,8 +97,10 @@ function userPage(){
 
 let modal = null;
 //Création de la fonction permettant d'ouvrir la modale
-const openModal = function(e) {
+const openModal = async function(e) {
     e.preventDefault();
+    const works = await (await fetch("http://localhost:5678/api/works")).json();
+    genererWorksModal(works);
     const target = document.querySelector('#modal1');
     target.style.display = 'flex';
     target.removeAttribute('aria-hidden');
@@ -142,5 +204,36 @@ form.addEventListener('change', () => {
 });
 
 
+const newWorkForm = document.querySelector(".form-wrapper-modal");
+newWorkForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+// Recupération des données entrées dans le formulaire
+    const imageUrl = document.querySelector("#imageUrl").files[0];
+    const title = document.querySelector("#title").value;
+    const categoryId = document.querySelector("#categoryId").value;
 
+    // Boucle en cas de champs non rempli
+    if(!imageUrl || !title || !categoryId){
+        alert('Veuillez remplir tous les champs');
+        return;
+    }
+
+    // Création du formData pour réunir toutes les données afin de l'envoyer à l'API
+    const formData = new FormData();
+    formData.append("imageUrl", imageUrl);
+    formData.append("title", title);
+    formData.append("category", categoryId);
+
+    //Envoi à l'API avec l'autorisation du token
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+        Authorization: "Bearer " + window.localStorage.getItem("token"),
+        },
+        body: formData
+    })
+    .then(res => res.json())
+    .then(response => console.log(response))
+    .catch(error => console.error(error));
+});
 
